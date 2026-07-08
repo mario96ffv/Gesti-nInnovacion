@@ -1,723 +1,657 @@
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innovación Abierta · Sistecrédito × USB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2A5A;
+  --navy-mid:#243570;
+  --orange:#E8610A;
+  --orange-light:#F59340;
+  --white:#FFFFFF;
+  --off-white:#F4F6FA;
+  --gray:#64748B;
+  --gray-light:#E2E8F0;
+  --dark-text:#1E293B;
+}
+html{scroll-behavior:auto}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--dark-text);
+  background:var(--white);
+  line-height:1.6;
+  overflow-x:hidden;
+}
 
-  *{box-sizing:border-box;margin:0;padding:0}
+/* ── PROGRESS BAR ── */
+.sc-progress{
+  position:fixed;top:0;left:0;
+  height:3px;background:var(--orange);
+  width:0%;z-index:300;
+  transition:width .1s linear;
+}
 
-  :root{
-    --navy:#1B2A5A;
-    --navy-mid:#243570;
-    --orange:#E8610A;
-    --orange-light:#F59340;
-    --white:#FFFFFF;
-    --off-white:#F4F6FA;
-    --gray:#64748B;
-    --gray-light:#E2E8F0;
-    --dark-text:#1E293B;
-    --text-muted:#8899AA;
-  }
+/* ── NAV ── */
+.sc-nav{
+  background:var(--navy);
+  padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+.sc-nav-brand{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:15px;
+  color:var(--white);letter-spacing:.05em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.sc-nav-brand span{color:var(--orange-light);}
+.sc-nav-links{display:flex;gap:4px;}
+.sc-nav-links a{
+  color:rgba(255,255,255,.55);text-decoration:none;
+  font-size:12px;font-weight:500;padding:6px 11px;
+  border-radius:6px;transition:all .18s;cursor:pointer;
+}
+.sc-nav-links a:hover,.sc-nav-links a.active{
+  color:#fff;background:rgba(255,255,255,.12);
+}
+.sc-nav-links a.active{color:var(--orange-light);}
+@media(max-width:600px){
+  .sc-nav{padding:0 1.2rem;}
+  .sc-nav-links{display:none;}
+}
 
-  .sc-root{
-    font-family:'DM Sans',sans-serif;
-    color:var(--dark-text);
-    background:var(--white);
-    line-height:1.6;
-    overflow-x:hidden;
-  }
+/* ── HERO ── */
+.sc-hero{
+  background:var(--navy);
+  padding:5rem 2.5rem 4rem;
+  position:relative;overflow:hidden;
+  min-height:360px;display:flex;flex-direction:column;justify-content:center;
+}
+.sc-hero-deco1{
+  position:absolute;right:-60px;top:-60px;
+  width:340px;height:340px;border-radius:50%;
+  border:2px solid rgba(232,97,10,.2);pointer-events:none;
+}
+.sc-hero-deco2{
+  position:absolute;right:20px;top:20px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(36,53,112,.7);pointer-events:none;
+}
+.sc-hero-deco3{
+  position:absolute;left:-40px;bottom:-40px;
+  width:180px;height:180px;border-radius:50%;
+  border:1px solid rgba(245,147,64,.12);pointer-events:none;
+}
+.sc-hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(232,97,10,.15);border:1px solid rgba(232,97,10,.35);
+  border-radius:20px;padding:5px 14px;
+  font-size:11px;font-weight:500;color:var(--orange-light);
+  letter-spacing:.05em;text-transform:uppercase;
+  margin-bottom:1.4rem;width:fit-content;
+}
+.sc-hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(30px,5vw,46px);font-weight:800;
+  color:var(--white);line-height:1.12;margin-bottom:.75rem;
+}
+.sc-hero h1 em{font-style:normal;color:var(--orange-light);}
+.sc-hero-sub{
+  font-size:15px;color:rgba(255,255,255,.6);
+  font-style:italic;margin-bottom:2.2rem;max-width:540px;
+}
+.sc-hero-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.sc-meta-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  border-radius:8px;padding:7px 13px;
+  font-size:12px;color:rgba(255,255,255,.72);
+}
+.sc-meta-pill i{font-size:14px;color:var(--orange-light);}
 
-  /* ── NAV ── */
-  .sc-nav{
-    background:var(--navy);
-    padding:0 2rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:52px;
-    position:sticky;
-    top:0;
-    z-index:100;
-  }
-  .sc-nav-brand{
-    font-family:'Syne',sans-serif;
-    font-weight:800;
-    font-size:14px;
-    color:var(--white);
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .sc-nav-brand span{color:var(--orange-light);}
-  .sc-nav-links{
-    display:flex;
-    gap:4px;
-  }
-  .sc-nav-links a{
-    color:rgba(255,255,255,.6);
-    text-decoration:none;
-    font-size:12px;
-    font-weight:500;
-    padding:6px 10px;
-    border-radius:6px;
-    transition:all .18s;
-    cursor:pointer;
-  }
-  .sc-nav-links a:hover,
-  .sc-nav-links a.active{
-    color:#fff;
-    background:rgba(255,255,255,.1);
-  }
+/* ── SECTIONS ── */
+.sc-section{
+  padding:4rem 2.5rem;
+  opacity:0;transform:translateY(22px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.sc-section.visible{opacity:1;transform:none;}
+.sc-section-alt{background:var(--off-white);}
+@media(max-width:640px){.sc-section{padding:3rem 1.4rem;}}
 
-  /* ── HERO ── */
-  .sc-hero{
-    background:var(--navy);
-    padding:4rem 2rem 3.5rem;
-    position:relative;
-    overflow:hidden;
-  }
-  .sc-hero-deco-circle{
-    position:absolute;
-    right:-80px;top:-80px;
-    width:320px;height:320px;
-    border-radius:50%;
-    border:2px solid rgba(232,97,10,.25);
-    pointer-events:none;
-  }
-  .sc-hero-deco-circle2{
-    position:absolute;
-    right:-20px;top:-20px;
-    width:200px;height:200px;
-    border-radius:50%;
-    background:rgba(36,53,112,.6);
-    pointer-events:none;
-  }
-  .sc-hero-tag{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    background:rgba(232,97,10,.15);
-    border:1px solid rgba(232,97,10,.3);
-    border-radius:20px;
-    padding:4px 12px;
-    font-size:11px;
-    font-weight:500;
-    color:var(--orange-light);
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    margin-bottom:1.2rem;
-  }
-  .sc-hero-tag i{font-size:12px;}
-  .sc-hero h1{
-    font-family:'Syne',sans-serif;
-    font-size:clamp(28px,5vw,42px);
-    font-weight:800;
-    color:var(--white);
-    line-height:1.15;
-    margin-bottom:.6rem;
-  }
-  .sc-hero h1 em{
-    font-style:normal;
-    color:var(--orange-light);
-  }
-  .sc-hero-sub{
-    font-size:15px;
-    color:rgba(255,255,255,.65);
-    font-style:italic;
-    margin-bottom:2rem;
-    max-width:520px;
-  }
-  .sc-hero-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .sc-meta-pill{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:8px;
-    padding:6px 12px;
-    font-size:12px;
-    color:rgba(255,255,255,.75);
-  }
-  .sc-meta-pill i{font-size:14px;color:var(--orange-light);}
+.sc-label{
+  font-size:11px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:.35rem;
+}
+.sc-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(22px,3.5vw,28px);font-weight:700;
+  color:var(--navy);margin-bottom:1.8rem;line-height:1.2;
+}
 
-  /* ── SECTIONS ── */
-  .sc-section{
-    padding:3rem 2rem;
-    opacity:0;
-    transform:translateY(20px);
-    transition:opacity .55s ease,transform .55s ease;
-  }
-  .sc-section.visible{
-    opacity:1;
-    transform:translateY(0);
-  }
-  .sc-section-alt{background:var(--off-white);}
+/* ── WHY CARDS ── */
+.sc-why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:18px;
+}
+.sc-why-card{
+  background:var(--white);border-radius:14px;
+  border:1px solid var(--gray-light);padding:0 0 1.5rem;
+  overflow:hidden;transition:transform .2s,box-shadow .2s;
+}
+.sc-why-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 28px rgba(27,42,90,.1);
+}
+.sc-why-accent{height:4px;}
+.sc-why-inner{padding:1.4rem 1.5rem 0;}
+.sc-why-icon{
+  width:38px;height:38px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;color:var(--white);margin-bottom:1rem;
+}
+.sc-why-card h3{
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
+  margin-bottom:.5rem;
+}
+.sc-why-card p{font-size:13.5px;color:var(--gray);line-height:1.58;}
 
-  .sc-section-label{
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--orange);
-    margin-bottom:.4rem;
-  }
-  .sc-section-title{
-    font-family:'Syne',sans-serif;
-    font-size:clamp(20px,3.5vw,26px);
-    font-weight:700;
-    color:var(--navy);
-    margin-bottom:1.5rem;
-    line-height:1.2;
-  }
+/* ── RETO ── */
+.sc-reto-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:start;
+}
+@media(max-width:640px){.sc-reto-grid{grid-template-columns:1fr;}}
+.sc-quote-box{
+  background:var(--navy);border-radius:14px;padding:2rem;
+  border-left:4px solid var(--orange);color:var(--white);
+  font-style:italic;font-size:14px;line-height:1.75;
+  position:relative;
+}
+.sc-quote-box::before{
+  content:'\201C';font-family:'Syne',sans-serif;font-size:72px;
+  color:var(--orange);opacity:.25;position:absolute;
+  top:-6px;left:14px;line-height:1;pointer-events:none;
+}
+.sc-approved{
+  margin-top:12px;background:var(--gray-light);border-radius:9px;
+  padding:10px 14px;font-size:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.sc-approved i{color:var(--orange);font-size:17px;flex-shrink:0;}
+.sc-deliverables{
+  margin-top:1.4rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+}
+.sc-dlv{
+  display:flex;align-items:flex-start;gap:7px;
+  font-size:13px;color:var(--dark-text);
+}
+.sc-dlv i{color:var(--orange);font-size:15px;margin-top:2px;flex-shrink:0;}
+.sc-reto-right{display:flex;flex-direction:column;gap:14px;}
+.sc-kpi{
+  background:var(--white);border-radius:12px;
+  border:1px solid var(--gray-light);padding:1.2rem 1.5rem;
+  border-left:3px solid var(--orange);
+}
+.sc-kpi-val{
+  font-family:'Syne',sans-serif;font-size:36px;font-weight:800;
+  color:var(--navy);line-height:1;margin-bottom:5px;
+}
+.sc-kpi-label{font-size:13px;color:var(--dark-text);}
+.sc-kpi-sub{font-size:11px;color:var(--gray);font-style:italic;margin-top:2px;}
+.sc-alcance{
+  background:var(--off-white);border-radius:12px;
+  padding:1.2rem 1.4rem;border:1px solid var(--gray-light);
+}
+.sc-alcance-label{
+  font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--orange);margin-bottom:.5rem;
+}
+.sc-alcance p{font-size:13px;color:var(--dark-text);line-height:1.58;}
 
-  /* ── WHY CARDS ── */
-  .sc-why-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:16px;
-    margin-top:1.5rem;
-  }
-  .sc-why-card{
-    background:var(--white);
-    border-radius:12px;
-    border:1px solid var(--gray-light);
-    padding:1.4rem;
-    position:relative;
-    overflow:hidden;
-    transition:transform .2s,box-shadow .2s;
-    cursor:default;
-  }
-  .sc-why-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 24px rgba(27,42,90,.1);
-  }
-  .sc-why-card-accent{
-    height:3px;
-    border-radius:0 0 0 0;
-    margin:-1.4rem -1.4rem 1.2rem;
-  }
-  .sc-why-card h3{
-    font-family:'Syne',sans-serif;
-    font-size:15px;
-    font-weight:700;
-    margin-bottom:.5rem;
-  }
-  .sc-why-card p{
-    font-size:13px;
-    color:var(--gray);
-    line-height:1.55;
-  }
-  .sc-why-icon{
-    width:36px;height:36px;
-    border-radius:8px;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:1rem;
-    font-size:18px;
-    color:var(--white);
-  }
+/* ── AVANCES ── */
+.sc-steps{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+@media(max-width:600px){.sc-steps{grid-template-columns:1fr;}}
+.sc-step{
+  background:var(--white);border-radius:12px;
+  border:1px solid var(--gray-light);border-left:3px solid var(--orange);
+  padding:1.1rem 1.2rem;transition:transform .18s;
+}
+.sc-step:hover{transform:translateX(4px);}
+.sc-step.en-curso{border-left-color:var(--orange-light);}
+.sc-step-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;gap:8px;margin-bottom:.6rem;
+}
+.sc-step-left{display:flex;align-items:center;gap:9px;}
+.sc-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--navy);color:#fff;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sc-step.en-curso .sc-num{background:var(--orange-light);}
+.sc-step-title{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  color:var(--navy);line-height:1.3;
+}
+.sc-badge{
+  font-size:10px;font-weight:600;padding:3px 10px;
+  border-radius:20px;flex-shrink:0;
+}
+.done{background:#E8F5E9;color:#2E7D32;}
+.wip{background:#FFF3E0;color:#C05800;}
+.sc-step-body{font-size:12.5px;color:var(--gray);line-height:1.5;}
+.sc-progress-wrap{margin-top:1.6rem;}
+.sc-progress-info{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--white);border:1px solid var(--gray-light);
+  border-radius:10px;padding:.9rem 1.2rem;margin-bottom:10px;
+}
+.sc-progress-dots{display:flex;gap:14px;flex-wrap:wrap;}
+.sc-dot{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);}
+.dot{width:10px;height:10px;border-radius:50%;}
+.sc-pct{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--navy);}
+.sc-pct-label{font-size:11px;color:var(--gray);text-align:right;line-height:1.3;}
+.sc-bar-track{
+  height:8px;background:var(--gray-light);border-radius:4px;overflow:hidden;
+}
+.sc-bar-fill{
+  height:100%;width:0;background:var(--orange);
+  border-radius:4px;transition:width 1.1s cubic-bezier(.4,0,.2,1) .2s;
+}
 
-  /* ── RETO ── */
-  .sc-reto-layout{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    align-items:start;
-  }
-  @media(max-width:580px){.sc-reto-layout{grid-template-columns:1fr;}}
-  .sc-reto-quote{
-    background:var(--navy);
-    border-radius:12px;
-    padding:1.8rem;
-    border-left:4px solid var(--orange);
-    color:var(--white);
-    font-style:italic;
-    font-size:14px;
-    line-height:1.7;
-    position:relative;
-  }
-  .sc-reto-quote::before{
-    content:'\201C';
-    font-family:'Syne',sans-serif;
-    font-size:60px;
-    color:var(--orange);
-    opacity:.3;
-    position:absolute;
-    top:-8px;left:12px;
-    line-height:1;
-  }
-  .sc-reto-right{display:flex;flex-direction:column;gap:14px;}
-  .sc-kpi{
-    background:var(--white);
-    border-radius:10px;
-    border:1px solid var(--gray-light);
-    padding:1.1rem 1.4rem;
-    border-left:3px solid var(--orange);
-  }
-  .sc-kpi-val{
-    font-family:'Syne',sans-serif;
-    font-size:32px;
-    font-weight:800;
-    color:var(--navy);
-    line-height:1;
-    margin-bottom:4px;
-  }
-  .sc-kpi-label{font-size:12px;color:var(--dark-text);}
-  .sc-kpi-sub{font-size:11px;color:var(--gray);font-style:italic;}
-  .sc-approved-bar{
-    background:var(--gray-light);
-    border-radius:8px;
-    padding:10px 14px;
-    font-size:12px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-top:4px;
-  }
-  .sc-approved-bar i{color:var(--orange);font-size:16px;}
-  .sc-deliverables{
-    margin-top:1.4rem;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-  }
-  .sc-dlv{
-    display:flex;align-items:flex-start;gap:8px;
-    font-size:13px;color:var(--dark-text);
-  }
-  .sc-dlv i{color:var(--orange);font-size:15px;margin-top:2px;flex-shrink:0;}
+/* ── CRONOGRAMA ── */
+.sc-timeline{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+@media(max-width:640px){.sc-timeline{grid-template-columns:1fr 1fr;}}
+@media(max-width:360px){.sc-timeline{grid-template-columns:1fr;}}
+.sc-tl-col{display:flex;flex-direction:column;}
+.sc-tl-header{
+  border-radius:10px 10px 0 0;padding:11px 0;
+  text-align:center;font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:700;color:#fff;
+  background:var(--navy-mid);
+}
+.sc-tl-col.now .sc-tl-header{background:var(--orange);}
+.sc-tl-body{
+  background:var(--white);border:1px solid var(--gray-light);
+  border-top:none;border-radius:0 0 10px 10px;
+  padding:14px;flex:1;display:flex;
+  flex-direction:column;gap:9px;
+}
+.sc-tl-item{
+  display:flex;align-items:flex-start;gap:7px;
+  font-size:12px;color:var(--dark-text);line-height:1.4;
+}
+.sc-tl-item i{font-size:13px;color:var(--orange);flex-shrink:0;margin-top:1px;}
+.sc-pres-tag{
+  margin-top:auto;padding-top:10px;
+  font-size:10px;font-weight:600;color:var(--orange);
+  display:flex;align-items:center;gap:4px;
+}
+.sc-note{
+  margin-top:1rem;font-size:12px;color:var(--gray);
+  font-style:italic;text-align:center;
+}
+.sc-note i{font-size:13px;vertical-align:-2px;margin-right:4px;}
 
-  /* ── AVANCES ── */
-  .sc-steps{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-    margin-top:1rem;
-  }
-  @media(max-width:560px){.sc-steps{grid-template-columns:1fr;}}
-  .sc-step{
-    background:var(--white);
-    border-radius:10px;
-    border:1px solid var(--gray-light);
-    border-left:3px solid var(--orange);
-    padding:1rem 1.1rem;
-    position:relative;
-    transition:transform .18s;
-  }
-  .sc-step:hover{transform:translateX(3px);}
-  .sc-step.en-curso{border-left-color:var(--orange-light);}
-  .sc-step-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:.5rem;
-    gap:8px;
-  }
-  .sc-step-num{
-    width:26px;height:26px;border-radius:50%;
-    background:var(--navy);
-    color:var(--white);
-    font-size:12px;
-    font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .sc-step.en-curso .sc-step-num{background:var(--orange-light);}
-  .sc-step-title{
-    font-family:'Syne',sans-serif;
-    font-size:13px;
-    font-weight:700;
-    color:var(--navy);
-    flex:1;
-    line-height:1.3;
-  }
-  .sc-badge{
-    font-size:10px;
-    font-weight:600;
-    padding:3px 9px;
-    border-radius:20px;
-    flex-shrink:0;
-  }
-  .sc-badge.done{background:#E8F5E9;color:#2E7D32;}
-  .sc-badge.wip{background:#FFF3E0;color:#E8610A;}
-  .sc-step-body{
-    font-size:12px;
-    color:var(--gray);
-    line-height:1.5;
-    margin-top:.3rem;
-  }
+/* ── CTA ── */
+.sc-cta{
+  margin-top:2.2rem;
+  background:var(--off-white);border-radius:14px;
+  padding:1.8rem 2rem;text-align:center;
+  border:1px solid var(--gray-light);
+}
+.sc-cta p{font-size:13px;color:var(--gray);margin-bottom:1rem;}
+.sc-cta-title{
+  font-family:'Syne',sans-serif;font-size:17px;font-weight:700;
+  color:var(--navy);margin-bottom:.4rem;
+}
+.sc-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:#fff;border:none;
+  border-radius:9px;padding:11px 22px;
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  font-weight:500;cursor:pointer;
+  text-decoration:none;transition:background .18s,transform .12s;
+}
+.sc-btn:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.sc-btn i{font-size:16px;}
 
-  /* ── CRONOGRAMA ── */
-  .sc-timeline{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    position:relative;
-    margin-top:1.5rem;
-  }
-  @media(max-width:600px){
-    .sc-timeline{grid-template-columns:1fr 1fr;}
-  }
-  .sc-tl-col{
-    display:flex;
-    flex-direction:column;
-    gap:0;
-  }
-  .sc-tl-header{
-    border-radius:8px 8px 0 0;
-    padding:10px 0;
-    text-align:center;
-    font-family:'Syne',sans-serif;
-    font-size:14px;
-    font-weight:700;
-    color:var(--white);
-    background:var(--navy-mid);
-  }
-  .sc-tl-col.active .sc-tl-header{background:var(--orange);}
-  .sc-tl-body{
-    background:var(--white);
-    border:1px solid var(--gray-light);
-    border-top:none;
-    border-radius:0 0 8px 8px;
-    padding:12px;
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-  .sc-tl-item{
-    display:flex;align-items:flex-start;gap:6px;
-    font-size:11.5px;color:var(--dark-text);
-    line-height:1.4;
-  }
-  .sc-tl-item i{font-size:13px;color:var(--orange);flex-shrink:0;margin-top:1px;}
-  .sc-tl-col.active .sc-tl-item i{color:var(--orange);}
-  .sc-presencial-tag{
-    margin-top:auto;
-    padding-top:10px;
-    font-size:10px;
-    font-weight:600;
-    color:var(--orange);
-    display:flex;align-items:center;gap:4px;
-  }
-  .sc-presencial-tag i{font-size:12px;}
-
-  /* ── FOOTER ── */
-  .sc-footer{
-    background:var(--navy);
-    padding:1.8rem 2rem;
-    text-align:center;
-    font-size:12px;
-    color:rgba(255,255,255,.45);
-  }
-  .sc-footer strong{color:rgba(255,255,255,.75);}
-
-  /* scroll progress bar */
-  .sc-progress{
-    position:fixed;
-    top:52px;left:0;
-    height:2px;
-    background:var(--orange);
-    width:0%;
-    z-index:200;
-    transition:width .1s;
-  }
+/* ── FOOTER ── */
+.sc-footer{
+  background:var(--navy);padding:2rem 2.5rem;
+  text-align:center;font-size:12px;
+  color:rgba(255,255,255,.4);
+}
+.sc-footer strong{color:rgba(255,255,255,.75);}
 </style>
+</head>
+<body>
 
-<div class="sc-root" id="scRoot">
-  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Landing page interactiva: Innovación Abierta Sistecrédito y Universidad San Buenaventura</h2>
+<div class="sc-progress" id="scProg"></div>
 
-  <div class="sc-progress" id="scProgress"></div>
+<nav class="sc-nav">
+  <div class="sc-nav-brand">
+    <i class="ti ti-bulb" style="font-size:17px;color:var(--orange-light)"></i>
+    Sistecrédito <span>&nbsp;× USB</span>
+  </div>
+  <div class="sc-nav-links">
+    <a onclick="goTo('why')" id="nl-why">¿Por qué?</a>
+    <a onclick="goTo('reto')" id="nl-reto">El reto</a>
+    <a onclick="goTo('avances')" id="nl-avances">Avances</a>
+    <a onclick="goTo('cronograma')" id="nl-cron">Cronograma</a>
+  </div>
+</nav>
 
-  <nav class="sc-nav">
-    <div class="sc-nav-brand">
-      <i class="ti ti-bulb" style="font-size:16px;color:var(--orange-light)" aria-hidden="true"></i>
-      Sistecrédito &nbsp;<span>× USB</span>
+<!-- HERO -->
+<section class="sc-hero" id="hero">
+  <div class="sc-hero-deco1"></div>
+  <div class="sc-hero-deco2"></div>
+  <div class="sc-hero-deco3"></div>
+  <div class="sc-hero-tag">
+    <i class="ti ti-sparkles"></i>
+    Innovación Abierta · Primera vez en Sistecrédito
+  </div>
+  <h1>Innovación Abierta<br><em>con la Universidad<br>San Buenaventura</em></h1>
+  <p class="sc-hero-sub">Reto: Rediseño de la experiencia de trabajo en equipos</p>
+  <div class="sc-hero-meta">
+    <div class="sc-meta-pill">
+      <i class="ti ti-building"></i>
+      Dirección de Transformación y Desarrollo Organizacional
     </div>
-    <div class="sc-nav-links">
-      <a onclick="scrollTo('why')" id="nav-why">¿Por qué?</a>
-      <a onclick="scrollTo('reto')" id="nav-reto">El reto</a>
-      <a onclick="scrollTo('avances')" id="nav-avances">Avances</a>
-      <a onclick="scrollTo('cronograma')" id="nav-cron">Cronograma</a>
+    <div class="sc-meta-pill">
+      <i class="ti ti-school"></i>
+      Universidad San Buenaventura · Medellín
     </div>
-  </nav>
+    <div class="sc-meta-pill">
+      <i class="ti ti-file-certificate"></i>
+      Trabajo de Grado — Innovación Empresarial
+    </div>
+  </div>
+</section>
 
-  <section class="sc-hero">
-    <div class="sc-hero-deco-circle2"></div>
-    <div class="sc-hero-deco-circle"></div>
-    <div class="sc-hero-tag">
-      <i class="ti ti-sparkles" aria-hidden="true"></i>
-      Innovación Abierta · Primera vez en Sistecrédito
-    </div>
-    <h1>Innovación Abierta<br><em>con la Universidad<br>San Buenaventura</em></h1>
-    <p class="sc-hero-sub">Reto: Rediseño de la experiencia de trabajo en equipos</p>
-    <div class="sc-hero-meta">
-      <div class="sc-meta-pill">
-        <i class="ti ti-building" aria-hidden="true"></i>
-        Dirección de Transformación y Desarrollo Organizacional
-      </div>
-      <div class="sc-meta-pill">
-        <i class="ti ti-school" aria-hidden="true"></i>
-        Universidad San Buenaventura · Medellín
-      </div>
-      <div class="sc-meta-pill">
-        <i class="ti ti-file-certificate" aria-hidden="true"></i>
-        Trabajo de Grado — Innovación Empresarial
-      </div>
-    </div>
-  </section>
-
-  <section class="sc-section sc-section-alt" id="why">
-    <div class="sc-section-label">Motivación</div>
-    <div class="sc-section-title">¿Por qué Innovación Abierta?</div>
-    <div class="sc-why-grid">
-      <div class="sc-why-card">
-        <div class="sc-why-card-accent" style="background:var(--navy)"></div>
-        <div class="sc-why-icon" style="background:var(--navy)"><i class="ti ti-rocket" aria-hidden="true"></i></div>
+<!-- WHY -->
+<section class="sc-section sc-section-alt" id="why">
+  <p class="sc-label">Motivación</p>
+  <h2 class="sc-title">¿Por qué Innovación Abierta?</h2>
+  <div class="sc-why-grid">
+    <div class="sc-why-card">
+      <div class="sc-why-accent" style="background:var(--navy)"></div>
+      <div class="sc-why-inner">
+        <div class="sc-why-icon" style="background:var(--navy)"><i class="ti ti-rocket"></i></div>
         <h3 style="color:var(--navy)">Primera vez</h3>
         <p>La innovación abierta es una modalidad nueva para Sistecrédito, adoptada como mecanismo para resolver retos organizacionales reales.</p>
       </div>
-      <div class="sc-why-card">
-        <div class="sc-why-card-accent" style="background:var(--orange)"></div>
-        <div class="sc-why-icon" style="background:var(--orange)"><i class="ti ti-trending-up" aria-hidden="true"></i></div>
+    </div>
+    <div class="sc-why-card">
+      <div class="sc-why-accent" style="background:var(--orange)"></div>
+      <div class="sc-why-inner">
+        <div class="sc-why-icon" style="background:var(--orange)"><i class="ti ti-trending-up"></i></div>
         <h3 style="color:var(--orange)">Mayor alcance</h3>
         <p>Es la opción más alcanzable en el momento actual: moviliza talento externo de alto nivel académico sin requerir alta inversión.</p>
       </div>
-      <div class="sc-why-card">
-        <div class="sc-why-card-accent" style="background:var(--navy-mid)"></div>
-        <div class="sc-why-icon" style="background:var(--navy-mid)"><i class="ti ti-users" aria-hidden="true"></i></div>
+    </div>
+    <div class="sc-why-card">
+      <div class="sc-why-accent" style="background:var(--navy-mid)"></div>
+      <div class="sc-why-inner">
+        <div class="sc-why-icon" style="background:var(--navy-mid)"><i class="ti ti-users"></i></div>
         <h3 style="color:var(--navy-mid)">Madurez en innovación</h3>
-        <p>Este convenio es un paso concreto para elevar la madurez de la innovación en la organización y establecer un modelo replicable.</p>
+        <p>Este convenio es un paso concreto para elevar la madurez de la innovación y establecer un modelo replicable en la organización.</p>
       </div>
     </div>
-    <p style="margin-top:1.2rem;font-size:12px;color:var(--gray);font-style:italic;"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Soportado en convenio universidad–empresa con lineamientos institucionales de la USB.</p>
-  </section>
+  </div>
+  <p style="margin-top:1.2rem;font-size:12px;color:var(--gray);font-style:italic;">
+    <i class="ti ti-info-circle" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>
+    Soportado en convenio universidad–empresa con lineamientos institucionales de la USB.
+  </p>
+</section>
 
-  <section class="sc-section" id="reto">
-    <div class="sc-section-label">El reto</div>
-    <div class="sc-section-title">¿Qué queremos resolver?</div>
-    <div class="sc-reto-layout">
-      <div>
-        <div class="sc-reto-quote">
-          ¿Cómo podríamos rediseñar la experiencia de trabajo de los equipos integrando planeación clara, priorización colectiva y retroalimentación oportuna, para que cada colaborador trabaje con propósito, corrija sin fricción y crezca junto a su equipo?
-        </div>
-        <div class="sc-approved-bar" style="margin-top:12px">
-          <i class="ti ti-check" aria-hidden="true"></i>
-          <span><strong>Aprobado por:</strong> Dirección de Talento Humano · Dirección de Transformación y Desarrollo Organizacional</span>
-        </div>
-        <div style="margin-top:1.2rem">
-          <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.6rem">Entregables esperados</div>
-          <div class="sc-deliverables">
-            <div class="sc-dlv"><i class="ti ti-check-circle" aria-hidden="true"></i><span>Diagnóstico estructurado</span></div>
-            <div class="sc-dlv"><i class="ti ti-check-circle" aria-hidden="true"></i><span>Formulación del problema</span></div>
-            <div class="sc-dlv"><i class="ti ti-check-circle" aria-hidden="true"></i><span>Diseño de la propuesta de innovación</span></div>
-            <div class="sc-dlv"><i class="ti ti-check-circle" aria-hidden="true"></i><span>Desarrollo metodológico y técnico</span></div>
-          </div>
-        </div>
+<!-- RETO -->
+<section class="sc-section" id="reto">
+  <p class="sc-label">El reto</p>
+  <h2 class="sc-title">¿Qué queremos resolver?</h2>
+  <div class="sc-reto-grid">
+    <div>
+      <div class="sc-quote-box">
+        ¿Cómo podríamos rediseñar la experiencia de trabajo de los equipos integrando planeación clara, priorización colectiva y retroalimentación oportuna, para que cada colaborador trabaje con propósito, corrija sin fricción y crezca junto a su equipo?
       </div>
-      <div class="sc-reto-right">
-        <div class="sc-kpi">
-          <div class="sc-kpi-val">90%</div>
-          <div class="sc-kpi-label">Índice de Cultura Organizacional</div>
-          <div class="sc-kpi-sub">Meta 2026</div>
-        </div>
-        <div class="sc-kpi">
-          <div class="sc-kpi-val">≤ 6%</div>
-          <div class="sc-kpi-label">Rotación de talento</div>
-          <div class="sc-kpi-sub">Meta 2026</div>
-        </div>
-        <div style="background:var(--off-white);border-radius:10px;padding:1.1rem;border:1px solid var(--gray-light)">
-          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--orange);margin-bottom:.5rem">Alcance</div>
-          <div style="font-size:12px;color:var(--dark-text);line-height:1.55">Trabajo de grado orientado a innovación empresarial. Los estudiantes diseñan soluciones a problemáticas reales de la empresa con alto rigor metodológico y aplicabilidad organizacional.</div>
+      <div class="sc-approved">
+        <i class="ti ti-check"></i>
+        <span><strong>Aprobado por:</strong> Dirección de Talento Humano · Dirección de Transformación y Desarrollo Organizacional</span>
+      </div>
+      <div style="margin-top:1.4rem">
+        <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.7rem">Entregables esperados</p>
+        <div class="sc-deliverables">
+          <div class="sc-dlv"><i class="ti ti-check-circle"></i><span>Diagnóstico estructurado</span></div>
+          <div class="sc-dlv"><i class="ti ti-check-circle"></i><span>Formulación del problema</span></div>
+          <div class="sc-dlv"><i class="ti ti-check-circle"></i><span>Diseño de la propuesta de innovación</span></div>
+          <div class="sc-dlv"><i class="ti ti-check-circle"></i><span>Desarrollo metodológico y técnico</span></div>
         </div>
       </div>
     </div>
-  </section>
+    <div class="sc-reto-right">
+      <div class="sc-kpi">
+        <div class="sc-kpi-val">90%</div>
+        <div class="sc-kpi-label">Índice de Cultura Organizacional</div>
+        <div class="sc-kpi-sub">Meta 2026</div>
+      </div>
+      <div class="sc-kpi">
+        <div class="sc-kpi-val">≤ 6%</div>
+        <div class="sc-kpi-label">Rotación de talento</div>
+        <div class="sc-kpi-sub">Meta 2026</div>
+      </div>
+      <div class="sc-alcance">
+        <p class="sc-alcance-label">Alcance</p>
+        <p>Trabajo de grado orientado a innovación empresarial. Los estudiantes diseñan soluciones a problemáticas reales de la empresa con alto rigor metodológico y aplicabilidad organizacional.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="sc-section sc-section-alt" id="avances">
-    <div class="sc-section-label">Progreso</div>
-    <div class="sc-section-title">Lo que hemos hecho</div>
-    <div class="sc-steps">
-      <div class="sc-step">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">1</div>
-            <div class="sc-step-title">Primer contacto virtual con la USB</div>
-          </div>
-          <span class="sc-badge done">Completado</span>
+<!-- AVANCES -->
+<section class="sc-section sc-section-alt" id="avances">
+  <p class="sc-label">Progreso</p>
+  <h2 class="sc-title">Lo que hemos hecho</h2>
+  <div class="sc-steps">
+    <div class="sc-step">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">1</div>
+          <div class="sc-step-title">Primer contacto virtual con la USB</div>
         </div>
-        <div class="sc-step-body">Reunión de 1 hora donde nos mostraron los tipos de convenios disponibles y exploramos la modalidad de Trabajo de Grado orientado a innovación empresarial.</div>
+        <span class="sc-badge done">Completado</span>
       </div>
-      <div class="sc-step">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">2</div>
-            <div class="sc-step-title">Socialización del reto</div>
-          </div>
-          <span class="sc-badge done">Completado</span>
-        </div>
-        <div class="sc-step-body">Comunicamos el reto e hicimos partícipes al Foco Cultura y For+, asegurando alineación estratégica interna.</div>
-      </div>
-      <div class="sc-step">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">3</div>
-            <div class="sc-step-title">Revisión de requisitos legales</div>
-          </div>
-          <span class="sc-badge done">Completado</span>
-        </div>
-        <div class="sc-step-body">Solicitud a Gestión Legal para revisión de la viabilidad del convenio y sus implicaciones organizacionales.</div>
-      </div>
-      <div class="sc-step">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">4</div>
-            <div class="sc-step-title">Refinación del reto</div>
-          </div>
-          <span class="sc-badge done">Completado</span>
-        </div>
-        <div class="sc-step-body">Trabajo conjunto con los dueños de procesos de Talento Humano y Agilismo para afinar el reto institucional.</div>
-      </div>
-      <div class="sc-step">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">5</div>
-            <div class="sc-step-title">Conocimiento de equipos presencial</div>
-          </div>
-          <span class="sc-badge done">Completado</span>
-        </div>
-        <div class="sc-step-body">Reunión presencial donde los dos equipos de trabajo nos conocimos — Sistecrédito y estudiantes de la USB.</div>
-      </div>
-      <div class="sc-step en-curso">
-        <div class="sc-step-header">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="sc-step-num">6</div>
-            <div class="sc-step-title">Documentos legales</div>
-          </div>
-          <span class="sc-badge wip">En curso</span>
-        </div>
-        <div class="sc-step-body">Carta de compromiso y consentimiento informado aprobados por Gestión Legal. <strong>Pendiente de firma.</strong></div>
-      </div>
+      <p class="sc-step-body">Reunión de 1 hora donde nos mostraron los tipos de convenios disponibles y exploramos la modalidad de Trabajo de Grado orientado a innovación empresarial.</p>
     </div>
+    <div class="sc-step">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">2</div>
+          <div class="sc-step-title">Socialización del reto</div>
+        </div>
+        <span class="sc-badge done">Completado</span>
+      </div>
+      <p class="sc-step-body">Comunicamos el reto e hicimos partícipes al Foco Cultura y For+, asegurando alineación estratégica interna.</p>
+    </div>
+    <div class="sc-step">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">3</div>
+          <div class="sc-step-title">Revisión de requisitos legales</div>
+        </div>
+        <span class="sc-badge done">Completado</span>
+      </div>
+      <p class="sc-step-body">Solicitud a Gestión Legal para revisión de la viabilidad del convenio y sus implicaciones organizacionales.</p>
+    </div>
+    <div class="sc-step">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">4</div>
+          <div class="sc-step-title">Refinación del reto</div>
+        </div>
+        <span class="sc-badge done">Completado</span>
+      </div>
+      <p class="sc-step-body">Trabajo conjunto con los dueños de procesos de Talento Humano y Agilismo para afinar el reto institucional.</p>
+    </div>
+    <div class="sc-step">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">5</div>
+          <div class="sc-step-title">Conocimiento de equipos presencial</div>
+        </div>
+        <span class="sc-badge done">Completado</span>
+      </div>
+      <p class="sc-step-body">Reunión presencial donde los dos equipos de trabajo nos conocimos: Sistecrédito y estudiantes de la USB.</p>
+    </div>
+    <div class="sc-step en-curso">
+      <div class="sc-step-top">
+        <div class="sc-step-left">
+          <div class="sc-num">6</div>
+          <div class="sc-step-title">Documentos legales</div>
+        </div>
+        <span class="sc-badge wip">En curso</span>
+      </div>
+      <p class="sc-step-body">Carta de compromiso y consentimiento informado aprobados por Gestión Legal. <strong>Pendiente de firma.</strong></p>
+    </div>
+  </div>
 
-    <div style="margin-top:1.5rem;background:var(--white);border-radius:10px;padding:1rem 1.2rem;border:1px solid var(--gray-light);display:flex;align-items:center;gap:10px">
-      <div style="display:flex;gap:4px;flex-wrap:wrap;flex:1;align-items:center">
-        <div style="display:flex;align-items:center;gap:5px;font-size:12px;">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--orange)"></div>
-          <span style="color:var(--gray)">5 pasos completados</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:12px;margin-left:12px">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--orange-light)"></div>
-          <span style="color:var(--gray)">1 en curso</span>
-        </div>
+  <div class="sc-progress-wrap">
+    <div class="sc-progress-info">
+      <div class="sc-progress-dots">
+        <div class="sc-dot"><div class="dot" style="background:var(--orange)"></div>5 pasos completados</div>
+        <div class="sc-dot"><div class="dot" style="background:var(--orange-light)"></div>1 en curso</div>
       </div>
-      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--navy)">83%</div>
-      <div style="font-size:11px;color:var(--gray)">avance<br>etapa inicial</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="sc-pct">83%</div>
+        <div class="sc-pct-label">avance<br>etapa inicial</div>
+      </div>
     </div>
-    <div style="background:var(--gray-light);border-radius:4px;height:8px;overflow:hidden;margin-top:8px">
-      <div id="progressBar" style="height:100%;width:0;background:var(--orange);border-radius:4px;transition:width 1s ease .3s"></div>
+    <div class="sc-bar-track">
+      <div class="sc-bar-fill" id="barFill"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sc-section" id="cronograma">
-    <div class="sc-section-label">Cronograma</div>
-    <div class="sc-section-title">Interacciones presenciales con la USB</div>
-    <div class="sc-timeline">
-      <div class="sc-tl-col active">
-        <div class="sc-tl-header">Mayo</div>
-        <div class="sc-tl-body">
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Primera reunión Comité de Bioética</span></div>
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Entrega carta de compromiso</span></div>
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Kick-off estudiantes USB</span></div>
-          <div class="sc-presencial-tag"><i class="ti ti-users" aria-hidden="true"></i>Presencial</div>
-        </div>
-      </div>
-      <div class="sc-tl-col">
-        <div class="sc-tl-header">Julio</div>
-        <div class="sc-tl-body">
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Avance diagnóstico estructurado</span></div>
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Revisión de contexto organizacional</span></div>
-          <div class="sc-presencial-tag"><i class="ti ti-users" aria-hidden="true"></i>Presencial</div>
-        </div>
-      </div>
-      <div class="sc-tl-col">
-        <div class="sc-tl-header">Agosto</div>
-        <div class="sc-tl-body">
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Formulación del problema</span></div>
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Diseño de propuesta de innovación</span></div>
-          <div class="sc-presencial-tag"><i class="ti ti-users" aria-hidden="true"></i>Presencial</div>
-        </div>
-      </div>
-      <div class="sc-tl-col">
-        <div class="sc-tl-header">Octubre</div>
-        <div class="sc-tl-body">
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Presentación de resultados</span></div>
-          <div class="sc-tl-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>Entrega propuesta final a Sistecrédito</span></div>
-          <div class="sc-presencial-tag"><i class="ti ti-users" aria-hidden="true"></i>Presencial</div>
-        </div>
+<!-- CRONOGRAMA -->
+<section class="sc-section" id="cronograma">
+  <p class="sc-label">Cronograma</p>
+  <h2 class="sc-title">Interacciones presenciales con la USB</h2>
+  <div class="sc-timeline">
+    <div class="sc-tl-col now">
+      <div class="sc-tl-header">Mayo</div>
+      <div class="sc-tl-body">
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Primera reunión Comité de Bioética</span></div>
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Entrega carta de compromiso</span></div>
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Kick-off estudiantes USB</span></div>
+        <div class="sc-pres-tag"><i class="ti ti-users"></i>Presencial</div>
       </div>
     </div>
-    <p style="margin-top:1rem;font-size:12px;color:var(--gray);font-style:italic;text-align:center">
-      <i class="ti ti-info-circle" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>
-      Las interacciones presenciales se concentran en estos cuatro meses. El resto del trabajo es virtual y autónomo por parte de los estudiantes.
-    </p>
-
-    <div style="margin-top:2rem;text-align:center">
-      <button onclick="sendPrompt('¿Qué preguntas debería anticipar la vicepresidencia sobre este proceso de innovación abierta con la USB?')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .18s">
-        <i class="ti ti-message-circle" style="font-size:15px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>
-        Anticipar preguntas de la vicepresidencia ↗
-      </button>
+    <div class="sc-tl-col">
+      <div class="sc-tl-header">Julio</div>
+      <div class="sc-tl-body">
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Avance diagnóstico estructurado</span></div>
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Revisión de contexto organizacional</span></div>
+        <div class="sc-pres-tag"><i class="ti ti-users"></i>Presencial</div>
+      </div>
     </div>
-  </section>
+    <div class="sc-tl-col">
+      <div class="sc-tl-header">Agosto</div>
+      <div class="sc-tl-body">
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Formulación del problema</span></div>
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Diseño de propuesta de innovación</span></div>
+        <div class="sc-pres-tag"><i class="ti ti-users"></i>Presencial</div>
+      </div>
+    </div>
+    <div class="sc-tl-col">
+      <div class="sc-tl-header">Octubre</div>
+      <div class="sc-tl-body">
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Presentación de resultados</span></div>
+        <div class="sc-tl-item"><i class="ti ti-file-text"></i><span>Entrega propuesta final a Sistecrédito</span></div>
+        <div class="sc-pres-tag"><i class="ti ti-users"></i>Presencial</div>
+      </div>
+    </div>
+  </div>
+  <p class="sc-note">
+    <i class="ti ti-info-circle"></i>
+    Las interacciones presenciales se concentran en estos cuatro meses. El resto del trabajo es virtual y autónomo por los estudiantes.
+  </p>
 
-  <footer class="sc-footer">
-    <strong>Sistecrédito · Equipo de Innovación</strong> — Dirección de Transformación y Desarrollo Organizacional<br>
-    Innovación Abierta × Universidad San Buenaventura · Medellín 2025
-  </footer>
-</div>
+  <div class="sc-cta">
+    <p class="sc-cta-title">¿Tienes preguntas sobre el proceso?</p>
+    <p>Contacta al Equipo de Innovación — Dirección de Transformación y Desarrollo Organizacional</p>
+    <a href="mailto:innovacion@sistecredito.com" class="sc-btn">
+      <i class="ti ti-mail"></i>
+      Contactar al equipo
+    </a>
+  </div>
+</section>
+
+<footer class="sc-footer">
+  <strong>Sistecrédito · Equipo de Innovación</strong><br>
+  Dirección de Transformación y Desarrollo Organizacional<br><br>
+  Innovación Abierta × Universidad San Buenaventura · Medellín 2025
+</footer>
 
 <script>
-  function scrollTo(id){
-    var el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  // ── Navigate to section (works on GitHub Pages) ──
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var navH = document.querySelector('.sc-nav').offsetHeight || 56;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+    window.scrollTo({ top: top, behavior: 'smooth' });
   }
 
-  var root=document.getElementById('scRoot');
-  var prog=document.getElementById('scProgress');
+  // ── Scroll progress bar ──
+  var prog = document.getElementById('scProg');
+  window.addEventListener('scroll', function(){
+    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    prog.style.width = Math.min(100, Math.round(pct * 100)) + '%';
+  }, {passive: true});
 
-  window.addEventListener('scroll',function(){
-    var scrolled=window.scrollY;
-    var max=document.body.scrollHeight-window.innerHeight;
-    if(prog)prog.style.width=Math.round((scrolled/max)*100)+'%';
-  },{passive:true});
-
-  var sections=document.querySelectorAll('.sc-section');
-  var obs=new IntersectionObserver(function(entries){
+  // ── Intersection observer — reveal sections + active nav ──
+  var navMap = {why:'nl-why', reto:'nl-reto', avances:'nl-avances', cronograma:'nl-cron'};
+  var obs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
         e.target.classList.add('visible');
-        var id=e.target.id;
-        document.querySelectorAll('.sc-nav-links a').forEach(function(a){a.classList.remove('active');});
-        var activeLink=document.getElementById('nav-'+id)||document.getElementById('nav-cron');
-        if(id==='cronograma'&&document.getElementById('nav-cron'))document.getElementById('nav-cron').classList.add('active');
-        else if(id==='why'&&document.getElementById('nav-why'))document.getElementById('nav-why').classList.add('active');
-        else if(id==='reto'&&document.getElementById('nav-reto'))document.getElementById('nav-reto').classList.add('active');
-        else if(id==='avances'&&document.getElementById('nav-avances'))document.getElementById('nav-avances').classList.add('active');
-        if(id==='avances'){
+        Object.values(navMap).forEach(function(id){
+          var el = document.getElementById(id);
+          if(el) el.classList.remove('active');
+        });
+        var nid = navMap[e.target.id];
+        if(nid){
+          var nel = document.getElementById(nid);
+          if(nel) nel.classList.add('active');
+        }
+        if(e.target.id === 'avances'){
           setTimeout(function(){
-            var pb=document.getElementById('progressBar');
-            if(pb)pb.style.width='83%';
-          },200);
+            var bar = document.getElementById('barFill');
+            if(bar) bar.style.width = '83%';
+          }, 250);
         }
       }
     });
-  },{threshold:.18});
-  sections.forEach(function(s){obs.observe(s);});
+  }, {threshold: 0.15});
 
-  document.querySelector('.sc-hero').style.opacity='1';
-  document.querySelector('.sc-hero').style.transform='none';
+  document.querySelectorAll('.sc-section').forEach(function(s){ obs.observe(s); });
+
+  // Hero visible immediately
+  document.querySelector('.sc-hero').style.opacity = '1';
+  document.querySelector('.sc-hero').style.transform = 'none';
 </script>
+</body>
+</html>
