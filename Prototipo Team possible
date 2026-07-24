@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo Sistecrédito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .screen { display: none; }
+        .screen.active { display: flex; }
+    </style>
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen font-sans text-gray-800">
+
+    <!-- CONTENEDOR DEL TELÉFONO -->
+    <div class="relative w-[390px] h-[844px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-[8px] border-black flex flex-col justify-between">
+        
+        <!-- Barra de Estado del Sistema -->
+        <div class="px-6 py-2 flex justify-between items-center text-xs font-bold bg-white z-10 shrink-0">
+            <span>1:47</span>
+            <div class="flex items-center space-x-1">
+                <span class="text-[9px] bg-black text-white px-1 rounded-sm">5G</span>
+                <span>📶</span>
+                <span>🔋 35</span>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DINÁMICO DE PANTALLAS -->
+        <div class="flex-1 overflow-y-auto px-5 pb-6">
+
+            <!-- PANTALLA 1: INICIO / HOME -->
+            <div id="screen-home" class="screen active flex-col">
+                <div class="text-center my-4">
+                    <h1 class="text-2xl font-black text-emerald-600 italic tracking-wider">sistecrédito</h1>
+                </div>
+                <div class="text-center mb-5">
+                    <p class="text-gray-500 text-sm">Hola, Carolina</p>
+                    <div class="flex justify-around mt-3 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                        <div>
+                            <p class="text-xs text-gray-400">Cupo disponible</p>
+                            <p class="text-lg font-bold text-emerald-600">$2.000.000</p>
+                        </div>
+                        <div class="border-l border-gray-200"></div>
+                        <div>
+                            <p class="text-xs text-gray-400">Cupo total aprobado</p>
+                            <p class="text-lg font-bold text-gray-700">$2.000.000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="font-bold text-sm mb-3">¿Dónde quieres comprar hoy?</h3>
+                <div class="grid grid-cols-4 gap-2 mb-5">
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-[10px] text-white font-bold">Alkosto</div>
+                        <span class="text-[10px] mt-1 text-gray-500">Alkosto</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-[10px] text-red-600 font-bold">Alkomprar</div>
+                        <span class="text-[10px] mt-1 text-gray-500">Alkomprar</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center text-[10px] text-white font-bold border-2 border-emerald-500">Ktronix</div>
+                        <span class="text-[10px] mt-1 font-semibold text-gray-800">Ktronix</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-[10px] text-white font-bold">Nihlo</div>
+                        <span class="text-[10px] mt-1 text-gray-500">Nihlo</span>
+                    </div>
+                </div>
+
+                <!-- Banner Inteligencia Artificial -->
+                <div class="bg-violet-50 border border-violet-100 p-4 rounded-3xl mb-4">
+                    <p class="text-xs text-violet-700 font-semibold mb-3">✨ IA encontró una financiación ideal para ti</p>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-4xl">🎧</span>
+                        <div>
+                            <span class="text-[9px] bg-blue-800 text-white px-2 py-0.5 rounded font-bold">K·TRONIX</span>
+                            <h4 class="font-bold text-sm text-gray-800">Audífonos Bose QuietComfort 45</h4>
+                            <p class="text-xs text-gray-400 line-through">$1.390.000</p>
+                            <p class="text-base font-bold text-gray-900">$1.290.000 <span class="text-[10px] text-emerald-600 font-normal">Envío gratis</span></p>
+                        </div>
+                    </div>
+                    <button onclick="goTo('screen-cuota')" class="w-full bg-emerald-600 text-white py-3 rounded-2xl font-bold text-sm shadow-md hover:bg-emerald-700 transition">
+                        Comprar con Sistecrédito
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 2: SELECCIÓN DE CUOTA -->
+            <div id="screen-cuota" class="screen flex-col">
+                <div class="flex items-center my-4">
+                    <button onclick="goTo('screen-home')" class="text-xl font-bold">←</button>
+                    <h2 class="flex-1 text-center font-bold text-lg text-gray-800">Tu cuota ideal</h2>
+                </div>
+                <p class="text-center text-xs text-gray-400 mb-4">Basado en tu historial y tus cuotas más usadas</p>
+
+                <div class="bg-violet-50 p-3 rounded-2xl mb-4 border border-violet-100 flex items-center space-x-2">
+                    <span class="text-violet-600">✨</span>
+                    <p class="text-[11px] text-violet-700">IA personaliza tu financiación para darte mejores beneficios.</p>
+                </div>
+
+                <!-- Opción Recomendada (Seleccionada por defecto) -->
+                <div class="border-2 border-emerald-500 bg-emerald-50/20 p-4 rounded-3xl mb-3 relative cursor-pointer">
+                    <div class="absolute top-3 right-3 bg-emerald-600 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full">⭐ Recomendada para ti</div>
+                    <div class="flex items-start space-x-3">
+                        <input type="radio" checked name="cuota" class="mt-1 accent-emerald-600">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">6 cuotas mensuales de</p>
+                            <p class="text-2xl font-black text-emerald-600">$180.000</p>
+                            <div class="grid grid-cols-3 gap-2 mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-500">
+                                <div>Tasa <strong class="block text-gray-800">1,9% M.V.</strong></div>
+                                <div>Beneficio <strong class="block text-gray-800">en aval</strong></div>
+                                <div>Cashback <strong class="block text-gray-800">$20.000</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segunda Opción -->
+                <div class="border border-gray-200 p-4 rounded-3xl mb-6 relative cursor-pointer bg-white">
+                    <div class="absolute top-3 right-3 bg-blue-900 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full">★ La que más usas</div>
+                    <div class="flex items-start space-x-3">
+                        <input type="radio" name="cuota" class="mt-1 accent-emerald-600">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">4 cuotas mensuales de</p>
+                            <p class="text-2xl font-black text-blue-950">$255.000</p>
+                            <div class="grid grid-cols-3 gap-2 mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-500">
+                                <div>Tasa <strong class="block text-gray-800">2,4% M.V.</strong></div>
+                                <div>Beneficio <strong class="block text-gray-800">en aval</strong></div>
+                                <div>Cashback <strong class="block text-gray-800">$10.000</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="goTo('screen-confirm')" class="w-full bg-emerald-600 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md hover:bg-emerald-700 transition mt-auto">
+                    Continuar
+                </button>
+                <p class="text-center text-xs text-blue-600 font-semibold mt-3 cursor-pointer">Cambiar plazo</p>
+            </div>
+
+            <!-- PANTALLA 3: CONFIRMACIÓN DE COMPRA -->
+            <div id="screen-confirm" class="screen flex-col">
+                <div class="flex items-center my-4">
+                    <button onclick="goTo('screen-cuota')" class="text-xl font-bold">←</button>
+                    <h2 class="flex-1 text-center font-bold text-lg text-gray-800">Confirma tu compra</h2>
+                </div>
+                <p class="text-center text-xs text-gray-400 mb-4">Revisa tu producto, tu plan y tus beneficios</p>
+
+                <!-- Detalle del Producto -->
+                <div class="border border-gray-100 rounded-3xl p-4 mb-3 flex items-center justify-between">
+                    <div>
+                        <span class="text-[9px] bg-blue-800 text-white px-2 py-0.5 rounded font-bold">K·TRONIX</span>
+                        <h4 class="font-bold text-sm text-gray-800 mt-1">Audífonos Bose QuietComfort 45</h4>
+                        <p class="text-xs text-gray-400 mt-2">Total de la compra: <strong class="text-gray-800">$1.290.000</strong></p>
+                    </div>
+                    <span class="text-4xl">🎧</span>
+                </div>
+
+                <!-- Detalle del Plan -->
+                <div class="border border-emerald-100 bg-emerald-50/10 rounded-3xl p-4 mb-3">
+                    <p class="text-[10px] text-gray-400">Plan seleccionado</p>
+                    <p class="text-lg font-bold text-emerald-600">6 cuotas de $180.000</p>
+                    <div class="grid grid-cols-3 gap-2 mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-500">
+                        <div>Tasa aplicada <strong class="block text-gray-800">1,9% M.V.</strong></div>
+                        <div>Beneficio <strong class="block text-gray-800">en aval</strong></div>
+                        <div>Cashback <strong class="block text-gray-800">$20.000</strong></div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-3 mb-4 text-[11px] text-gray-500 flex items-center space-x-2">
+                    <span class="text-emerald-500">✔</span>
+                    <p>Al finalizar tu compra te mostraremos cómo redimir tu cashback.</p>
+                </div>
+
+                <button onclick="goTo('screen-success')" class="w-full bg-emerald-600 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md hover:bg-emerald-700 transition mt-auto">
+                    Confirmar compra
+                </button>
+                <button onclick="goTo('screen-cuota')" class="w-full border border-emerald-600 text-emerald-600 py-3.5 rounded-2xl font-bold text-sm mt-2">
+                    Volver
+                </button>
+            </div>
+
+            <!-- PANTALLA 4: COMPRA EXITOSA -->
+            <div id="screen-success" class="screen flex-col items-center text-center">
+                <div class="text-center my-4 w-full">
+                    <h1 class="text-2xl font-black text-emerald-600 italic tracking-wider">sistecrédito</h1>
+                </div>
+
+                <div class="w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-3 shadow-lg">✓</div>
+                <h2 class="text-xl font-bold text-gray-900">¡Compra exitosa!</h2>
+                <p class="text-xs text-gray-400 mb-5">Tu pedido está confirmado.</p>
+
+                <!-- Tarjeta Resumen -->
+                <div class="border border-gray-100 rounded-3xl p-4 w-full text-left mb-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[9px] bg-blue-800 text-white px-2 py-0.5 rounded font-bold">K·TRONIX</span>
+                        <span class="text-2xl">🎧</span>
+                    </div>
+                    <h4 class="font-bold text-xs text-gray-800">Audífonos Bose QuietComfort 45</h4>
+                    <div class="text-xs text-gray-500 space-y-1.5 mt-3 pt-3 border-t border-gray-100">
+                        <div class="flex justify-between"><span>Total de la compra:</span><strong class="text-gray-800">$1.290.000</strong></div>
+                        <div class="flex justify-between"><span>Plan seleccionado:</span><strong class="text-gray-800">6 cuotas de $180.000</strong></div>
+                        <div class="flex justify-between"><span>Tasa aplicada:</span><strong class="text-gray-800">1,9% M.V.</strong></div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Premio Cashback -->
+                <div class="border border-emerald-100 bg-emerald-50/20 rounded-3xl p-4 w-full text-left mb-5">
+                    <div class="flex items-center space-x-2 text-emerald-600 font-bold text-xs mb-1">
+                        <span>🪙</span>
+                        <p>Ganaste $20.000 de cashback</p>
+                    </div>
+                    <p class="text-[10px] text-gray-500 pl-6">Lo verás reflejado en tu app dentro de las 24 horas.</p>
+                </div>
+
+                <button onclick="goTo('screen-cashback')" class="w-full bg-emerald-600 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md hover:bg-emerald-700 transition">
+                    Ver plan de pagos
+                </button>
+                <button onclick="goTo('screen-home')" class="w-full border border-emerald-600 text-emerald-600 py-3.5 rounded-2xl font-bold text-sm mt-2">
+                    Ir al marketplace
+                </button>
+            </div>
+
+            <!-- PANTALLA 5: TU CASHBACK -->
+            <div id="screen-cashback" class="screen flex-col">
+                <div class="text-center my-4">
+                    <h1 class="text-2xl font-black text-emerald-600 italic tracking-wider">sistecrédito</h1>
+                </div>
+                <div class="flex items-center mb-4">
+                    <button onclick="goTo('screen-success')" class="text-xl font-bold">←</button>
+                    <h2 class="flex-1 text-center font-bold text-lg text-gray-800">Tu cashback</h2>
+                </div>
+                <p class="text-center text-xs text-gray-400 mb-4">Conoce cómo redimirlo</p>
+
+                <!-- Saldo de Cashback -->
+                <div class="border border-emerald-100 bg-emerald-50/20 p-4 rounded-3xl flex items-center space-x-4 mb-4">
+                    <span class="text-3xl bg-emerald-500 text-white w-12 h-12 rounded-full flex items-center justify-center">💲</span>
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase">Cashback disponible:</p>
+                        <p class="text-2xl font-black text-emerald-600">$20.000</p>
+                        <p class="text-[10px] text-gray-400">Disponible para tu próxima compra en el marketplace.</p>
+                    </div>
+                </div>
+
+                <!-- Pasos para Redimir -->
+                <div class="border border-gray-100 rounded-3xl p-4 mb-4">
+                    <h3 class="font-bold text-sm text-gray-800 mb-3">¿Cómo redimirlo?</h3>
+                    <div class="space-y-3 text-[11px]">
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-emerald-100 text-emerald-700 w-5 h-5 rounded-full flex items-center justify-center font-bold shrink-0">1</span>
+                            <p class="text-gray-600"><strong class="text-gray-800">Elige un producto</strong> en el marketplace.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-emerald-100 text-emerald-700 w-5 h-5 rounded-full flex items-center justify-center font-bold shrink-0">2</span>
+                            <p class="text-gray-600"><strong class="text-gray-800">Selecciona Sistecrédito</strong> como medio de pago.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="bg-emerald-100 text-emerald-700 w-5 h-5 rounded-full flex items-center justify-center font-bold shrink-0">3</span>
+                            <p class="text-gray-600">Tu cashback <strong class="text-gray-800">se aplicará automáticamente</strong> si la compra cumple condiciones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="goTo('screen-home')" class="w-full bg-emerald-600 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md hover:bg-emerald-700 transition">
+                    Usar en mi próxima compra
+                </button>
+                <button onclick="goTo('screen-home')" class="w-full border border-emerald-600 text-emerald-600 py-3.5 rounded-2xl font-bold text-sm mt-2">
+                    Entendido
+                </button>
+            </div>
+
+        </div>
+
+        <!-- BARRA DE NAVEGACIÓN INFERIOR (Estática) -->
+        <div class="border-t border-gray-100 bg-white py-3 px-4 flex justify-around items-center text-[10px] text-gray-400 shrink-0">
+            <div onclick="goTo('screen-home')" class="flex flex-col items-center cursor-pointer text-emerald-600 font-bold">
+                <span class="text-lg">🏠</span>
+                <span>Inicio</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-lg">💲</span>
+                <span>Créditos</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-lg">💵</span>
+                <span>Pagar</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-lg">🏪</span>
+                <span>Tiendas</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-lg">☰</span>
+                <span>Más</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script para cambiar de pantalla -->
+    <script>
+        function goTo(screenId) {
+            // Ocultar todas las pantallas
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            // Mostrar la pantalla seleccionada
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
